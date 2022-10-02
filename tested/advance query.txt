@@ -1,0 +1,24 @@
+SELECT videos.*, GROUP_CONCAT(genres.genres) as genres FROM videos JOIN videos_genres ON videos.id = videos_genres.videos_id JOIN genres on videos_genres.genres_id = genres.id GROUP by videos.id
+
+
+
+
+SELECT videos.*, GROUP_CONCAT(genres.genres) FROM videos JOIN videos_genres ON videos.id = videos_genres.videos_id JOIN genres on videos_genres.id= genres.id where videos.id=1
+
+get user data and video data in wishlist
+SELECT videos.*,GROUP_CONCAT(genres.genres) as genres, users.* from wishlist RIGHT join users on user_id=users.id RIGHT join videos on videos_id=videos.id join videos_genres on videos.id=videos_genres.videos_id join genres on videos_genres.id=genres.id where wishlist.user_id=1 GROUP by wishlist.videos_id
+
+get video data in wishlist
+SELECT videos.*,GROUP_CONCAT(genres.genres) as genres from wishlist RIGHT join videos on videos_id=videos.id join videos_genres on videos.id=videos_genres.videos_id join genres on videos_genres.id=genres.id where wishlist.user_id=1 GROUP by wishlist.videos_id
+
+project
+codeweiserFUTURE12345@
+
+
+
+ah question about this query if i dont use the distinct in videos_part it create duplicate of video_part
+SELECT videos.*, GROUP_CONCAT(videos_lists.video_part) as videos_part, GROUP_CONCAT(genres.genres) as genres FROM videos join videos_lists on videos.id=videos_lists.videos_id JOIN videos_genres ON videos.id = videos_genres.videos_id JOIN genres on videos_genres.genres_id = genres.id where videos.id=4
+
+
+with distinct it is perfect
+SELECT videos.*, GROUP_CONCAT(DISTINCT videos_lists.video_part) as videos_part, GROUP_CONCAT(DISTINCT genres.genres) as genres FROM videos join videos_lists on videos.id=videos_lists.videos_id JOIN videos_genres ON videos.id = videos_genres.videos_id JOIN genres on videos_genres.genres_id = genres.id where videos.id=4
